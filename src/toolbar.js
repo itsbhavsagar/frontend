@@ -16,7 +16,7 @@ export const PipelineToolbar = () => {
       }}
     >
       <h3 style={{ marginBottom: "20px", color: "#343a40" }}>
-        Toolbar <MdInput />
+        Toolbar
       </h3>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
         <DraggableNode
