@@ -1,11 +1,13 @@
 import React, { useState, useCallback } from "react";
+import { BaseNode } from "./baseNode";
 import { Handle, Position } from "reactflow";
 import TextareaAutosize from "react-textarea-autosize";
 import { useStore } from "../store";
 import { BsTextareaT } from "react-icons/bs";
 
 export const TextNode = ({ id, data, isConnectable }) => {
-  const [text, setText] = useState(data.text || "");
+  const [text, setText] = useState(data?.text || "{{input}}");
+
   const { updateNodeField, nodes } = useStore((state) => ({
     updateNodeField: state.updateNodeField,
     nodes: state.nodes,
@@ -32,7 +34,6 @@ export const TextNode = ({ id, data, isConnectable }) => {
     return variables;
   };
 
-  // Get the variables and create handles dynamically
   const variables = extractVariables(text);
 
   return (
@@ -41,17 +42,20 @@ export const TextNode = ({ id, data, isConnectable }) => {
         padding: "10px",
         borderRadius: "8px",
         backgroundColor: "#ffffff",
-        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-        width: "auto", // Ensure width adjusts based on content
-        minWidth: "150px", // Ensure a minimum width
+        boxShadow: "0 2px 4px rgb(45, 191, 128)",
+        width: "auto",
+        minWidth: "150px",
+        position: "relative",
       }}
     >
+      {/* Left-side handles */}
+
       {variables.map((variable, index) => (
         <Handle
-          key={index}
+          key={`left-${variable}`}
           type="target"
           position={Position.Left}
-          id={variable}
+          id={`left-${variable}`}
           style={{
             top: `${(100 / (variables.length + 1)) * (index + 1)}%`,
             background: "#555",
@@ -59,8 +63,25 @@ export const TextNode = ({ id, data, isConnectable }) => {
           isConnectable={isConnectable}
         />
       ))}
+
+      {/* Right-side handle */}
+
+      <Handle
+        type="source"
+        position={Position.Right}
+        id="output"
+        style={{
+          top: "50%", // Center vertically
+          background: "#555",
+        }}
+        isConnectable={isConnectable}
+      />
+
       <label>
-        <BsTextareaT /> Text
+        <div style={{ fontWeight: "bold" }}>
+          <BsTextareaT /> Text
+        </div>
+
         <TextareaAutosize
           text
           minRows={1}
@@ -68,12 +89,12 @@ export const TextNode = ({ id, data, isConnectable }) => {
           value={text}
           onChange={handleTextChange}
           style={{
-            width: "100%", // Allow text area to use full width of the container
+            width: "100%",
             border: "1px solid #ccc",
             borderRadius: "4px",
             padding: "5px",
             fontSize: "14px",
-            boxSizing: "border-box", // Ensure padding and border are included in width
+            boxSizing: "border-box",
           }}
         />
       </label>

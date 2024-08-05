@@ -1,9 +1,15 @@
 // toolbar.js
 import { DraggableNode } from "./draggableNode";
-// Imported icons from react-icons
-import { FaGenderless } from "react-icons/fa";
-import { FcProcess, FcDecision, FcGenealogy } from "react-icons/fc";
-import { MdInput, MdTextFields, MdOutput, MdStart } from "react-icons/md";
+import { GiProcessor } from "react-icons/gi";
+import { BiAnalyse } from "react-icons/bi";
+import {
+  MdInput,
+  MdTransform,
+  MdTextFields,
+  MdOutput,
+  MdUpload,
+  MdOutlineMergeType,
+} from "react-icons/md";
 
 export const PipelineToolbar = () => {
   return (
@@ -15,16 +21,19 @@ export const PipelineToolbar = () => {
         boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
       }}
     >
-      <h3 style={{ marginBottom: "20px", color: "#343a40" }}>
-        Toolbar
-      </h3>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+      <h3 style={{ marginBottom: "10px", color: "#1C2536" }}>Toolbar</h3>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "10px",
+        }}
+      >
         <DraggableNode
           type="customInput"
           label="Input"
           icon={<MdInput size={18} />}
         />
-        <DraggableNode type="llm" label="LLM" icon={<MdInput size={18} />} />
         <DraggableNode
           type="customOutput"
           label="Output"
@@ -35,30 +44,35 @@ export const PipelineToolbar = () => {
           label="Text"
           icon={<MdTextFields size={18} />}
         />
+        <DraggableNode type="llm" label="LLM" icon={<MdInput size={18} />} />
+
         <DraggableNode
-          type="start"
-          label="Start"
-          icon={<MdStart size={18} />}
+          type="fileUpload"
+          label="File Upload"
+          icon={<MdUpload size={18} />}
         />
-        <DraggableNode
-          type="end"
-          label="End"
-          icon={<FaGenderless size={18} />}
-        />
+
         <DraggableNode
           type="processing"
           label="Processing"
-          icon={<FcProcess size={18} />}
+          icon={<GiProcessor size={18} />}
         />
         <DraggableNode
           type="decision"
           label="Decision"
-          icon={<FcDecision size={18} />}
+          icon={<MdTransform size={18} />}
         />
         <DraggableNode
+          ResultNode
           type="merge"
           label="Merge"
-          icon={<FcGenealogy size={18} />}
+          icon={<MdOutlineMergeType size={18} />}
+        />
+
+        <DraggableNode
+          type="result"
+          label="Result"
+          icon={<BiAnalyse size={18} />}
         />
       </div>
     </div>

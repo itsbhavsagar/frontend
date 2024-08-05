@@ -1,17 +1,7 @@
+// OutputNode.js
 import React from "react";
-import { BaseNode } from "./baseNode";
-import { Position } from "reactflow";
+import withNodeForm from "../withNodeForm";
 
-export const OutputNode = ({ id, data }) => {
-  const handles = [{ type: "target", position: Position.Left, id: "value" }];
+const OutputNode = withNodeForm((props) => <div {...props} />, "Output");
 
-  return (
-    <BaseNode
-      id={id}
-      data={data}
-      title="Output"
-      handles={handles}
-      additionalStyles={{ border: "1px solid red" }}
-    />
-  );
-};
+export default OutputNode;

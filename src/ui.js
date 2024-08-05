@@ -4,15 +4,15 @@ import { useState, useRef, useCallback } from "react";
 import ReactFlow, { Controls, Background, MiniMap } from "reactflow";
 import { useStore } from "./store";
 import { shallow } from "zustand/shallow";
-import { InputNode } from "./nodes/inputNode";
+import InputNode from "./nodes/inputNode";
+import OutputNode from "./nodes/outputNode";
 import { LLMNode } from "./nodes/llmNode";
-import { OutputNode } from "./nodes/outputNode";
 import { TextNode } from "./nodes/textNode";
-import { StartNode } from "./nodes/startNode";
-import { EndNode } from "./nodes/endNode";
+import { FileUploadNode } from "./nodes/fileUploadNode";
 import { ProcessingNode } from "./nodes/processingNode";
 import { DecisionNode } from "./nodes/decisionNode";
 import { MergeNode } from "./nodes/mergeNode";
+import { ResultNode } from "./nodes/resultNode";
 
 import "reactflow/dist/style.css";
 
@@ -20,14 +20,15 @@ const gridSize = 20;
 const proOptions = { hideAttribution: true };
 const nodeTypes = {
   customInput: InputNode,
-  llm: LLMNode,
   customOutput: OutputNode,
+  llm: LLMNode,
   text: TextNode,
-  start: StartNode,
-  end: EndNode,
+  fileUpload: FileUploadNode,
+  end: FileUploadNode,
   processing: ProcessingNode,
   decision: DecisionNode,
   merge: MergeNode,
+  result: ResultNode,
 };
 
 const selector = (state) => ({

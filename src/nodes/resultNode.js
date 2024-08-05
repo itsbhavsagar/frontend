@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { BaseNode } from "./baseNode";
 import { Position } from "reactflow";
-import { GiProcessor } from "react-icons/gi";
+import { BiAnalyse } from "react-icons/bi";
 
-export const ProcessingNode = ({ id, data }) => {
+export const ResultNode = ({ id, data }) => {
   const handles = [
-    { type: "source", position: Position.Right, id: "process" },
-    { type: "target", position: Position.Left, id: "input" },
+    // { type: "source", position: Position.Right, id: "process" },
+    { type: "source", position: Position.Left, id: "input" },
   ];
 
   return (
     <BaseNode
       id={id}
       data={data}
-      icon={<GiProcessor />}
-      title="Processing"
+      icon={<BiAnalyse />}
+      title="Result"
       handles={handles}
       additionalStyles={{
         border: "3px solid #2DBF80",
@@ -23,7 +23,7 @@ export const ProcessingNode = ({ id, data }) => {
       }}
     >
       <div>
-        <span style={{ fontSize: "14px" }}>This is a processing Node</span>
+        <span style={{ fontSize: "14px" }}>This is a result Node</span>
       </div>
     </BaseNode>
   );
